@@ -1,32 +1,35 @@
-#include <vector>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <assert.h>
-#include <algorithm>
+#include <stdio.h>
+
+template<typename T>
+T Min(T a, T b) {
+	if (a < b) {
+		return a;
+	} else {
+		return b;
+	}
+}
 
 int main() {
-	std::ifstream file("Resources/PG3_2025_01_02.txt");
-	assert(file.is_open());
-	// 格納
-	std::vector<std::string> students;
-	std::string line;
-	while (std::getline(file, line)) {
-		std::stringstream ss(line);
-		std::string item;
-		while (std::getline(ss, item, ',')) {
-			students.push_back(item);
-		}
-	}
-	file.close();
+	int x = 10;
+	int y = 20;
+	int minInt = Min(x, y);
+	printf("X: %d\n", x);
+	printf("Y: %d\n", y);
+	printf("MinInt: %d\n\n", minInt);
 
-	// ソート
-	std::sort(students.begin(), students.end());
-	
-	// 出力
-	for (const std::string& student : students) {
-		printf("%s\n", student.c_str());
-	}
+	float p = 5.5f;
+	float q = 3.3f;
+	float minFloat = Min(p, q);
+	printf("P: %.2f\n", p);
+	printf("Q: %.2f\n", q);
+	printf("MinFloat: %.2f\n\n", minFloat);
+
+	double m = 7.7;
+	double n = 9.9;
+	double minDouble = Min(m, n);
+	printf("M: %.2f\n", m);
+	printf("N: %.2f\n", n);
+	printf("MinDouble: %.2f\n\n", minDouble);
 
 	return 0;
 }
