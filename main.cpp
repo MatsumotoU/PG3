@@ -1,35 +1,35 @@
-#include <stdio.h>
+#include <stdint.h>
+#include <iostream>
 
-template<typename T>
-T Min(T a, T b) {
-	if (a < b) {
-		return a;
+// 再帰的に賃金を計算する関数
+float CalculateWage(float wage,uint32_t hour){
+	if(hour != 0){
+		return wage + CalculateWage(wage * 2.0f - 50.0f, hour - 1);
 	} else {
-		return b;
+		return 0.0;
 	}
 }
 
 int main() {
-	int x = 10;
-	int y = 20;
-	int minInt = Min(x, y);
-	printf("X: %d\n", x);
-	printf("Y: %d\n", y);
-	printf("MinInt: %d\n\n", minInt);
-
-	float p = 5.5f;
-	float q = 3.3f;
-	float minFloat = Min(p, q);
-	printf("P: %.2f\n", p);
-	printf("Q: %.2f\n", q);
-	printf("MinFloat: %.2f\n\n", minFloat);
-
-	double m = 7.7;
-	double n = 9.9;
-	double minDouble = Min(m, n);
-	printf("M: %.2f\n", m);
-	printf("N: %.2f\n", n);
-	printf("MinDouble: %.2f\n\n", minDouble);
+	float wage = 1226.0f;
+	uint32_t hour;
+	std::cout << "Enter worked hours: ";
+	std::cin >> hour;
+	// 再帰的に計算した賃金と線形計算の賃金を表示
+	std::cout << "Recursion: " << CalculateWage(100.0f, hour) << "$" << std::endl;
+	std::cout << "Liner: " << wage * hour << "$" << std::endl;
+	
+	// 何時間再帰的に計算した賃金が線形計算の賃金を下回るか
+	uint32_t i = 1;
+	float reursionWage = CalculateWage(100.0f,i);
+	float linerWage = wage;
+	while (reursionWage < linerWage)
+	{
+		i++;
+		reursionWage = CalculateWage(100.0f, i);
+		linerWage = wage * static_cast<float>(i);
+	}
+	std::cout << "Recursion wage becomes less than liner wage at hour: " << i << std::endl;
 
 	return 0;
 }
