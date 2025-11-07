@@ -1,35 +1,36 @@
 #include <stdint.h>
 #include <iostream>
+#include <Windows.h>
+#include <stdio.h>
+#include <locale.h>
 
-// 再帰的に賃金を計算する関数
-float CalculateWage(float wage,uint32_t hour){
-	if(hour != 0){
-		return wage + CalculateWage(wage * 2.0f - 50.0f, hour - 1);
-	} else {
-		return 0.0;
-	}
+void ShowResult(int roll, int userGuess) {
+    wprintf(L"正解は%dでした\n", roll);
+    if (roll % 2 == userGuess) {
+        wprintf(L"おめでとう！当たりです。\n");
+    } else {
+        wprintf(L"残念！はずれです。\n");
+    }
+}
+
+void DelayReaval(uint32_t delayMs, int roll, int userGuess) {
+    wprintf(L"サイコロを振っています...\n");
+    Sleep(delayMs);
+    void (*fn)(int, int) = ShowResult;
+    fn(roll, userGuess);
 }
 
 int main() {
-	float wage = 1226.0f;
-	uint32_t hour;
-	std::cout << "Enter worked hours: ";
-	std::cin >> hour;
-	// 再帰的に計算した賃金と線形計算の賃金を表示
-	std::cout << "Recursion: " << CalculateWage(100.0f, hour) << "$" << std::endl;
-	std::cout << "Liner: " << wage * hour << "$" << std::endl;
-	
-	// 何時間再帰的に計算した賃金が線形計算の賃金を下回るか
-	uint32_t i = 1;
-	float reursionWage = CalculateWage(100.0f,i);
-	float linerWage = wage;
-	while (reursionWage < linerWage)
-	{
-		i++;
-		reursionWage = CalculateWage(100.0f, i);
-		linerWage = wage * static_cast<float>(i);
-	}
-	std::cout << "Recursion wage becomes less than liner wage at hour: " << i << std::endl;
+    SetConsoleOutputCP(65001); // UTF-8
+    setlocale(LC_ALL, "");
 
-	return 0;
+	wprintf(L"サイコロを振ります。偶数なら0、奇数なら1を入力してください: ");
+    int playerIn = 0;
+    scanf_s("%d", &playerIn);
+    srand(static_cast<unsigned int>(time(0)));
+    int random_value = rand() % 6 + 1;
+    void (*fn)(uint32_t, int, int) = DelayReaval;
+    fn(1000, random_value, playerIn);
+
+    return 0;
 }
