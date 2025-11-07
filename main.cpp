@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <stdio.h>
 #include <locale.h>
+#include <functional>
 
 void ShowResult(int roll, int userGuess) {
     wprintf(L"正解は%dでした\n", roll);
@@ -16,7 +17,7 @@ void ShowResult(int roll, int userGuess) {
 void DelayReaval(uint32_t delayMs, int roll, int userGuess) {
     wprintf(L"サイコロを振っています...\n");
     Sleep(delayMs);
-    void (*fn)(int, int) = ShowResult;
+	std::function fn = ShowResult;
     fn(roll, userGuess);
 }
 
@@ -29,7 +30,7 @@ int main() {
     scanf_s("%d", &playerIn);
     srand(static_cast<unsigned int>(time(0)));
     int random_value = rand() % 6 + 1;
-    void (*fn)(uint32_t, int, int) = DelayReaval;
+    std::function fn = DelayReaval;
     fn(1000, random_value, playerIn);
 
     return 0;
