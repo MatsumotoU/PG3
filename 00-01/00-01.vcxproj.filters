@@ -22,9 +22,4 @@
   <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="answer02-02.md">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-  </ItemGroup>
 </Project>

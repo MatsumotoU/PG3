@@ -22,7 +22,7 @@ int main() {
 
 	// ソート
 	std::sort(students.begin(), students.end());
-	
+
 	// 出力
 	for (const std::string& student : students) {
 		printf("%s\n", student.c_str());
