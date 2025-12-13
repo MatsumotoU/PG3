@@ -6,7 +6,7 @@
 #include <algorithm>
 
 int main() {
-	std::ifstream file("Resources/PG3_2025_01_02.txt");
+	std::ifstream file("PG3_2025_01_02.txt");
 	assert(file.is_open());
 	// 格納
 	std::vector<std::string> students;
