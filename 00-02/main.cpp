@@ -1,7 +1,5 @@
 #include <iostream>
-#include <Windows.h>
 #include <list>
-
 int main() {
 	std::list<const char*> stations;
 	printf("1970:\n\n");
