@@ -1,8 +1,4 @@
-#include <stdint.h>
 #include <iostream>
-#include <Windows.h>
-#include <stdio.h>
-#include <locale.h>
 #include <functional>
 #include <map>
 
