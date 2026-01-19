@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 int main() {
+	// 駅をリストに登録
 	std::list<const char*> stations;
 	printf("1970:\n\n");
 	stations.push_back("Tokyo");
@@ -32,10 +33,11 @@ int main() {
 	stations.push_back("Shimbashi");
 	stations.push_back("Yurakucho");
 
+	// 駅名を表示
 	for (const char* station : stations) {
 		std::cout << station << std::endl;
 	}
-
+	// 2019年に新駅「西日暮里」が開業
 	printf("\n2019:\n\n");
 	auto it = stations.begin();
 	std::advance(it, 7);
@@ -43,7 +45,7 @@ int main() {
 	for (const char* station : stations) {
 		std::cout << station << std::endl;
 	}
-
+	// 2022年に新駅「高輪ゲートウェイ」が開業
 	printf("\n2022:\n\n");
 	it = stations.begin();
 	std::advance(it, 25);
