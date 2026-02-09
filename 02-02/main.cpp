@@ -21,12 +21,14 @@ int main() {
 
 	// 何時間再帰的に計算した賃金が線形計算の賃金を下回るか
 	uint32_t i = 1;
-	float recursionWage = CalculateWage(100.0f, i);
+	float recursionWage = 100.0f;
+	float currentWage = 100.0f;
 	float linearWage = wage;
 	while (recursionWage < linearWage)
 	{
 		i++;
-		recursionWage = CalculateWage(100.0f, i);
+		currentWage = currentWage * 2.0f - 50.0f;
+		recursionWage += currentWage;
 		linearWage = wage * static_cast<float>(i);
 	}
 	std::cout << "Greater than liner wage at hour: " << i << std::endl;
