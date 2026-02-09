@@ -17,19 +17,19 @@ int main() {
 	std::cin >> hour;
 	// 再帰的に計算した賃金と線形計算の賃金を表示
 	std::cout << "Recursion: " << CalculateWage(100.0f, hour) << "$" << std::endl;
-	std::cout << "Liner: " << wage * hour << "$" << std::endl;
+	std::cout << "Linear: " << wage * hour << "$" << std::endl;
 
 	// 何時間再帰的に計算した賃金が線形計算の賃金を下回るか
 	uint32_t i = 1;
-	float reursionWage = CalculateWage(100.0f, i);
-	float linerWage = wage;
-	while (reursionWage < linerWage)
+	float recursionWage = CalculateWage(100.0f, i);
+	float linearWage = wage;
+	while (recursionWage < linearWage)
 	{
 		i++;
-		reursionWage = CalculateWage(100.0f, i);
-		linerWage = wage * static_cast<float>(i);
+		recursionWage = CalculateWage(100.0f, i);
+		linearWage = wage * static_cast<float>(i);
 	}
-	std::cout << "Recursion wage becomes less than liner wage at hour: " << i << std::endl;
+	std::cout << "Greater than liner wage at hour: " << i << std::endl;
 
 	return 0;
 }
