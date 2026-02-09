@@ -14,10 +14,9 @@ void ShowResult(int roll, int userGuess) {
 	}
 }
 
-void DelayReaval(uint32_t delayMs, int roll, int userGuess) {
+void DelayReveal(void(*fn)(int, int), uint32_t delayMs, int roll, int userGuess) {
 	wprintf(L"サイコロを振っています...\n");
 	Sleep(delayMs);
-	std::function fn = ShowResult;
 	fn(roll, userGuess);
 }
 
@@ -30,8 +29,8 @@ int main() {
 	scanf_s("%d", &playerIn);
 	srand(static_cast<unsigned int>(time(0)));
 	int random_value = rand() % 6 + 1;
-	std::function fn = DelayReaval;
-	fn(1000, random_value, playerIn);
+	std::function fn = DelayReveal;
+	fn(ShowResult, 1000, random_value, playerIn);
 
 	return 0;
 }
