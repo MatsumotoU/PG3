@@ -10,10 +10,10 @@ void PrintMessage(const std::string& message) {
 int main() {
 	std::vector<std::thread> threads;
 	threads.push_back(std::thread(PrintMessage, "thread 1"));
-	threads.back().join(); // ƒƒCƒ“ƒXƒŒƒbƒh‚ªthread 1‚ÌI—¹‚ğ‘Ò‹@
+	threads.back().join(); // ãƒ¡ã‚¤ãƒ³ã‚¹ãƒ¬ãƒƒãƒ‰ãŒthread 1ã®çµ‚äº†ã‚’å¾…æ©Ÿ
 	threads.push_back(std::thread(PrintMessage, "thread 2"));
-	threads.back().join(); // ƒƒCƒ“ƒXƒŒƒbƒh‚ªthread 2‚ÌI—¹‚ğ‘Ò‹@
+	threads.back().join(); // ãƒ¡ã‚¤ãƒ³ã‚¹ãƒ¬ãƒƒãƒ‰ãŒthread 2ã®çµ‚äº†ã‚’å¾…æ©Ÿ
 	threads.push_back(std::thread(PrintMessage, "thread 3"));
-	threads.back().join(); // ƒƒCƒ“ƒXƒŒƒbƒh‚ªthread 3‚ÌI—¹‚ğ‘Ò‹@
+	threads.back().join(); // ãƒ¡ã‚¤ãƒ³ã‚¹ãƒ¬ãƒƒãƒ‰ãŒthread 3ã®çµ‚äº†ã‚’å¾…æ©Ÿ
 	return 0;
 }
