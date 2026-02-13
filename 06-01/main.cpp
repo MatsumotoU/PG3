@@ -2,18 +2,29 @@
 #include <vector>
 #include <thread>
 #include <functional>
+#include <mutex>
+#include <condition_variable>
 
-void PrintMessage(const std::string& message) {
+void PrintMessage(const std::string& message, int my_order, int& current_order, std::mutex& mtx, std::condition_variable& cv) {
+	std::unique_lock<std::mutex> lock(mtx);
+	cv.wait(lock, [&] { return my_order == current_order; });
 	std::cout << message << std::endl;
+	++current_order;
+	cv.notify_all();
 }
 
 int main() {
 	std::vector<std::thread> threads;
-	threads.push_back(std::thread(PrintMessage, "thread 1"));
-	threads.back().join(); // メインスレッドがthread 1の終了を待機
-	threads.push_back(std::thread(PrintMessage, "thread 2"));
-	threads.back().join(); // メインスレッドがthread 2の終了を待機
-	threads.push_back(std::thread(PrintMessage, "thread 3"));
-	threads.back().join(); // メインスレッドがthread 3の終了を待機
+	std::mutex mtx;
+	std::condition_variable cv;
+	int current_order = 0;
+
+	threads.push_back(std::thread(PrintMessage, std::string("thread 1"), 0, std::ref(current_order), std::ref(mtx), std::ref(cv)));
+	threads.push_back(std::thread(PrintMessage, std::string("thread 2"), 1, std::ref(current_order), std::ref(mtx), std::ref(cv)));
+	threads.push_back(std::thread(PrintMessage, std::string("thread 3"), 2, std::ref(current_order), std::ref(mtx), std::ref(cv)));
+
+	for (auto& t : threads) {
+		t.join();
+	}
 	return 0;
 }
