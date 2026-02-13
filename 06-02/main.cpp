@@ -27,16 +27,16 @@ int main() {
 
 	std::thread loader(LoadCSV, "sample.csv", std::ref(csvData), std::ref(finished));
 
-	// バックグラウンドでCSV読み込み中
+	// 繝舌ャ繧ｯ繧ｰ繝ｩ繧ｦ繝ｳ繝峨〒CSV隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ
 	while (!finished) {
-		std::cout << "CSV読み込み中...\n";
+		std::cout << "CSV隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...\n";
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
 
 	loader.join();
 
-	// 読み込んだデータを表示
-	std::cout << "CSV読み込み完了。行数: " << csvData.size() << std::endl;
+	// 隱ｭ縺ｿ霎ｼ繧薙□繝�繝ｼ繧ｿ繧定｡ｨ遉ｺ
+	std::cout << "CSV隱ｭ縺ｿ霎ｼ縺ｿ螳御ｺ�縲り｡梧焚: " << csvData.size() << std::endl;
 	for (const auto& row : csvData) {
 		for (const auto& cell : row) {
 			std::cout << cell << " ";
